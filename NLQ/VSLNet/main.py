@@ -225,6 +225,9 @@ def main(configs, parser):
                         # only keep the top-3 model checkpoints
                         filter_checkpoints(model_dir, suffix="t7", max_to_keep=3)
                     model.train()
+                    final_model_path = os.path.join(model_dir, f"{configs.model_name}_final.t7")
+                    torch.save(model.state_dict(), final_model_path)
+                    print(f" Modello finale salvato in: {final_model_path}")
             
         score_writer.close()
 
