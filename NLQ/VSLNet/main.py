@@ -154,9 +154,9 @@ def main(configs, parser):
                 # generate mask
                 video_mask = convert_length_to_mask(vfeat_lens).to(device)
                 # compute logits
-                h_score, start_logits, end_logits = model(
-                    word_ids, char_ids, vfeats, video_mask, query_mask
-                )
+                # h_score, start_logits, end_logits = model(
+                    # word_ids, char_ids, vfeats, video_mask, query_mask
+                # )
                 # compute loss
                 highlight_loss = model.compute_highlight_loss(
                     h_score, h_labels, video_mask
@@ -164,7 +164,8 @@ def main(configs, parser):
                 loc_loss = model.compute_loss(
                     start_logits, end_logits, s_labels, e_labels
                 )
-                total_loss = loc_loss + configs.highlight_lambda * highlight_loss
+                # total_loss = loc_loss + configs.highlight_lambda * highlight_loss
+                total_loss = loc_loss 
                 # compute and apply gradients
                 optimizer.zero_grad()
                 total_loss.backward()
